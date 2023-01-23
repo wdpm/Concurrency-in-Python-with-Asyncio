@@ -1,7 +1,8 @@
-from threading import Lock, Thread
+from threading import Lock, Thread, RLock
 from typing import List
 
-list_lock = Lock()
+# list_lock = Lock()
+list_lock = RLock()
 
 
 def sum_list(int_list: List[int]) -> int:
@@ -20,3 +21,10 @@ def sum_list(int_list: List[int]) -> int:
 thread = Thread(target=sum_list, args=([1, 2, 3, 4],))
 thread.start()
 thread.join()
+
+# Waiting to acquire lock...
+# Acquired lock.
+# Summing rest of list.
+# Waiting to acquire lock...
+
+# dead lock when recursive call

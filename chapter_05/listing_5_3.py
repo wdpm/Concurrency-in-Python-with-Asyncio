@@ -8,7 +8,7 @@ async def main():
                                        port=5432,
                                        user='postgres',
                                        database='products',
-                                       password='password')
+                                       password='123456')
     statements = [CREATE_BRAND_TABLE,
                   CREATE_PRODUCT_TABLE,
                   CREATE_PRODUCT_COLOR_TABLE,

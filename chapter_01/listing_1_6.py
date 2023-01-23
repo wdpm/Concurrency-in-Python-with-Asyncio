@@ -32,3 +32,9 @@ fibs_with_threads()
 end_threads = time.time()
 
 print(f'Threads took {end_threads - start_threads:.4f} seconds.')
+
+# fib(40) is 63245986
+# fib(41) is 102334155
+# Threads took 66.1059 seconds.
+
+# 受限于GIL，多线程似乎没起到明显地作用。

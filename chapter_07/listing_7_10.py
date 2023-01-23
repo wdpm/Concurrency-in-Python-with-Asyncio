@@ -1,11 +1,11 @@
-from threading import Lock
+from threading import RLock
 from typing import List
 
 
 class IntListThreadsafe:
 
     def __init__(self, wrapped_list: List[int]):
-        self._lock = Lock()
+        self._lock = RLock()
         self._inner_list = wrapped_list
 
     def indices_of(self, to_find: int) -> List[int]:
@@ -16,6 +16,9 @@ class IntListThreadsafe:
     def find_and_replace(self,
                          to_replace: int,
                          replace_with: int) -> None:
+        # If you are developing a thread-safe class with a method A(find_and_replace),
+        # which acquires a lock, and a method B(indices_of) that also needs to acquire a lock and
+        # call method A, you likely need to use a reentrant lock
         with self._lock:
             indices = self.indices_of(to_replace)
             for index in indices:

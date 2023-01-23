@@ -7,6 +7,7 @@ async def do_work(condition: Condition):
         print('Waiting for condition lock...')
         async with condition:
             print('Acquired lock, releasing and waiting for condition...')
+            # The wait coroutine method will block until someone calls the condition’s notify_all method
             await condition.wait()
             print('Condition event fired, re-acquiring lock and doing work...')
             await asyncio.sleep(1)

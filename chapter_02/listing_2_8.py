@@ -9,3 +9,8 @@ async def main():
     print(result)
 
 asyncio.run(main())
+
+# <class '_asyncio.Task'>
+# sleeping for 3 second(s)
+# finished sleeping for 3 second(s)
+# 3

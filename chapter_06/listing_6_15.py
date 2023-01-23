@@ -37,7 +37,7 @@ def run_in_new_loop(num_queries: int) -> List[Dict]:
         async with asyncpg.create_pool(host='127.0.0.1',
                                        port=5432,
                                        user='postgres',
-                                       password='password',
+                                       password='123456',
                                        database='products',
                                        min_size=6,
                                        max_size=6) as pool:

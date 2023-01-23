@@ -24,12 +24,14 @@ while True:
     for event, _ in events:
         event_socket = event.fileobj #C
 
+        # connect event
         if event_socket == server_socket: #D
             connection, address = server_socket.accept()
             connection.setblocking(False)
             print(f"I got a connection from {address}")
             selector.register(connection, selectors.EVENT_READ) #E
         else:
+            # client send data event
             data = event_socket.recv(1024) #F
             print(f"I got some data: {data}")
             event_socket.send(data)

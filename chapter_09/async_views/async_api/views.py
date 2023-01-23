@@ -26,7 +26,9 @@ async def make_requests(url: str, request_num: int):
 
 async def requests_view(request):
     url: str = request.GET['url']
+    print(f'url: {url}')
     request_num: int = int(request.GET['request_num'])
+    print(f'request_num: {request_num}')
     context = await make_requests(url, request_num)
     return render(request, 'async_api/requests.html', context)
 
@@ -45,6 +47,7 @@ async def sync_to_async_view(request):
     sleep_time: int = int(request.GET['sleep_time'])
     num_calls: int = int(request.GET['num_calls'])
     thread_sensitive: bool = request.GET['thread_sensitive'] == 'True'
+    print(f'{sleep_time}:{num_calls}:{thread_sensitive}')
     function = sync_to_async(partial(sleep, sleep_time), thread_sensitive=thread_sensitive)
     await asyncio.gather(*[function() for _ in range(num_calls)])
     return HttpResponse('')

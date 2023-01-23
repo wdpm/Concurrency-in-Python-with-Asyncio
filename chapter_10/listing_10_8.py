@@ -7,6 +7,8 @@ from aiohttp.web_response import Response
 import logging
 from typing import Dict, Set, Awaitable, Optional, List
 
+from chapter_10.listing_10_11 import CircuitBreaker
+
 routes = web.RouteTableDef()
 
 PRODUCT_BASE = 'http://127.0.0.1:8000'
@@ -21,6 +23,20 @@ async def all_products(request: Request) -> Response:
         products = asyncio.create_task(session.get(f'{PRODUCT_BASE}/products'))
         favorites = asyncio.create_task(session.get(f'{FAVORITE_BASE}/users/3/favorites'))
         cart = asyncio.create_task(session.get(f'{CART_BASE}/users/3/cart'))
+
+        # In this example, we try each service a maximum of three times. This lets us recover
+        # from issues with our services that may be transient. While this is an improvement,
+        # there is another potential issue that can hurt our service.
+
+        # For example, what happens if our product service always times out?
+
+        # product_request = functools.partial(session.get, f'{PRODUCT_BASE}/products')
+        # favorite_request = functools.partial(session.get,f'{FAVORITE_BASE}/users/5/favorites')
+        # cart_request = functools.partial(session.get, f'{CART_BASE}/users/5/cart')
+        #
+        # products = asyncio.create_task(retry(product_request,max_retries=3,timeout=.1,retry_interval=.1))
+        # favorites = asyncio.create_task(retry(favorite_request,max_retries=3,timeout=.1,retry_interval=.1))
+        # cart = asyncio.create_task(retry(cart_request,max_retries=3,timeout=.1,retry_interval=.1))
 
         requests = [products, favorites, cart]
         done, pending = await asyncio.wait(requests, timeout=1.0)
@@ -55,12 +71,20 @@ async def get_products_with_inventory(session: ClientSession, product_response) 
         url = f"{INVENTORY_BASE}/products/{product_id}/inventory"
         return asyncio.create_task(session.get(url))
 
+    inventory_circuit = CircuitBreaker(get_inventory, timeout=.5, time_window=5.0,max_failures=3, reset_interval=30)
+
     def create_product_record(product_id: int, inventory: Optional[int]) -> Dict:
         return {'product_id': product_id, 'inventory': inventory}
 
     inventory_tasks_to_product_id = {
         get_inventory(session, product['product_id']): product['product_id'] for product in product_response
     }
+
+    inventory_tasks_to_pid = {
+        asyncio.create_task(inventory_circuit.request(session, product['product_id'])): product['product_id']
+        for product in product_response
+    }
+    # inventory_done, inventory_pending = await asyncio.wait(inventory_tasks_to_pid.keys(), timeout=1.0)
 
     inventory_done, inventory_pending = await asyncio.wait(inventory_tasks_to_product_id.keys(), timeout=1.0)
 

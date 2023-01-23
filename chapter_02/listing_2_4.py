@@ -13,3 +13,8 @@ async def main() -> None:
 
 
 asyncio.run(main())
+print('main')
+
+# 2
+# 3
+# main

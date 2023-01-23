@@ -7,10 +7,14 @@ async def main():
                                        port=5432,
                                        user='postgres',
                                        database='postgres',
-                                       password='password')
+                                       password='123456')
     version = connection.get_server_version()
     print(f'Connected! Postgres version is {version}')
     await connection.close()
 
 
 asyncio.run(main())
+
+# Connected! Postgres version is ServerVersion(major=9, minor=5, micro=17, releaselevel='final', serial=0)
+
+# psql -U postgres

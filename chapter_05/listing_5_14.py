@@ -17,3 +17,13 @@ async def main():
 
 
 asyncio.run(main())
+
+# starting <function main at 0x00000212F3AB6EF0> with args () {}
+# <class 'async_generator'>
+# sleeping for 1 second(s)
+# finished sleeping for 1 second(s)
+# Got number 1
+# sleeping for 2 second(s)
+# finished sleeping for 2 second(s)
+# Got number 2
+# finished <function main at 0x00000212F3AB6EF0> in 3.0229 second(s)

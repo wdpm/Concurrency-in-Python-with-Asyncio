@@ -17,6 +17,9 @@ try:
             connection.setblocking(False)
             print(f'I got a connection from {client_address}!')
             connections.append(connection)
+        # This addresses the issue of our blocking server and allows multiple cli-
+        # ents to connect and send data concurrently.
+        # 但是，代码不够优雅
         except BlockingIOError:
             pass
 

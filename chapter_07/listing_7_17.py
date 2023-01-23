@@ -15,6 +15,8 @@ def random_password(length: int) -> bytes:
 
 passwords = [random_password(10) for _ in range(10000)]
 
+# starting <function main at 0x000002721A569120> with args () {}
+# finished <function main at 0x000002721A569120> in 23.0813 second(s)
 
 def hash(password: bytes) -> str:
     salt = os.urandom(16)
@@ -34,3 +36,5 @@ async def main():
 
 
 asyncio.run(main())
+
+#  Since hashlib releases the GIL we realize some decent performance gains.

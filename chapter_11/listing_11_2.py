@@ -5,9 +5,12 @@ counter: int = 0
 
 async def increment():
     global counter
+    # read
     temp_counter = counter
+    # increase
     temp_counter = temp_counter + 1
     await asyncio.sleep(0.01)
+    # write it back
     counter = temp_counter
 
 

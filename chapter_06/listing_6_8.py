@@ -44,6 +44,7 @@ async def main(partition_size: int):
                 tasks.append(loop.run_in_executor(pool, functools.partial(map_frequencies, chunk)))
 
             intermediate_results = await asyncio.gather(*tasks)
+            # reduce这里存在较大的优化空间
             final_result = functools.reduce(merge_dictionaries, intermediate_results)
 
             print(f"Aardvark has appeared {final_result['Aardvark']} times.")
@@ -54,3 +55,6 @@ async def main(partition_size: int):
 
 if __name__ == "__main__":
     asyncio.run(main(partition_size=60000))
+
+# Aardvark has appeared 15209 times.
+# MapReduce took: 58.5711 seconds

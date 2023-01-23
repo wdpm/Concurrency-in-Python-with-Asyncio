@@ -3,19 +3,31 @@ import concurrent.futures
 import functools
 import time
 from typing import Dict, List
+
 from chapter_06.listing_6_8 import partition, merge_dictionaries, map_frequencies
 
 
 async def reduce(loop, pool, counters, chunk_size) -> Dict[str, int]:
-    chunks: List[List[Dict]] = list(partition(counters, chunk_size)) #A
+    # counters => [{},{},...]
+    print(len(counters))
+    # 1444
+
+    # 将一个大数组内部分为等大的小数组。
+    chunks: List[List[Dict]] = list(partition(counters, chunk_size))  # A
+    # chunks => [[{},{},...],[{},{},...],...]
     reducers = []
     while len(chunks[0]) > 1:
+        # chunk is [{},{},...]
         for chunk in chunks:
-            reducer = functools.partial(functools.reduce, merge_dictionaries, chunk) #B
+            reducer = functools.partial(functools.reduce, merge_dictionaries, chunk)  # B
+            # reducer is {}
             reducers.append(loop.run_in_executor(pool, reducer))
-        reducer_chunks = await asyncio.gather(*reducers) #C
-        chunks = list(partition(reducer_chunks, chunk_size)) #D
+        # reducer_chunks => [{},{},{}]
+        reducer_chunks = await asyncio.gather(*reducers)  # C
+        chunks = list(partition(reducer_chunks, chunk_size))  # D
         reducers.clear()
+
+    # chunks [[{key:value,...}]]
     return chunks[0][0]
 
 
@@ -41,3 +53,6 @@ async def main(partition_size: int):
 
 if __name__ == "__main__":
     asyncio.run(main(partition_size=60000))
+
+# Aardvark has appeared 15209 times.
+# MapReduce took: 56.5746 seconds

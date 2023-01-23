@@ -32,3 +32,11 @@ async def main():
 
 
 asyncio.run(main())
+
+# add concurrency-in-python-with-asyncio/chapter_11 to PYTHONPATH
+
+# Usage:
+# cat file | nc localhost 9000
+# Ctrl C cancel
+
+# then check server output

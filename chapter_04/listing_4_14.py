@@ -1,5 +1,7 @@
 import asyncio
+
 import aiohttp
+
 from chapter_04 import fetch_status
 from util import async_timed
 
@@ -21,4 +23,17 @@ async def main():
             for done_task in done:
                 print(await done_task)
 
+
 asyncio.run(main())
+
+# Done task count: 1
+# Pending task count: 2
+# 200
+
+# Done task count: 1
+# Pending task count: 1
+# 200
+
+# Done task count: 1
+# Pending task count: 0
+# 200

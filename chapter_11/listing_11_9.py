@@ -7,6 +7,8 @@ async def main():
 
     await semaphore.acquire()
     semaphore.release()
+
+    # ValueError: BoundedSemaphore released too many times
     semaphore.release()
 
 

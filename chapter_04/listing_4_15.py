@@ -1,5 +1,7 @@
 import asyncio
+
 import aiohttp
+
 from chapter_04 import fetch_status
 from util import async_timed
 
@@ -12,7 +14,7 @@ async def main():
                     asyncio.create_task(fetch_status(session, url)),
                     asyncio.create_task(fetch_status(session, url, delay=3))]
 
-        done, pending = await asyncio.wait(fetchers, timeout=1)
+        done, pending = await asyncio.wait(fetchers, timeout=2)
 
         print(f'Done task count: {len(done)}')
         print(f'Pending task count: {len(pending)}')
@@ -23,3 +25,6 @@ async def main():
 
 
 asyncio.run(main())
+
+# wait_for timeout时取消任务
+# wair timeout时仅仅返回，不取消任务

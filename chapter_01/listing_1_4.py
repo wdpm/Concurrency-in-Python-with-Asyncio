@@ -13,3 +13,6 @@ if __name__ == '__main__':
     print(f'Hello from parent process {os.getpid()}')
 
     hello_process.join()
+
+# Hello from parent process 18400
+# Hello from child process 4228!

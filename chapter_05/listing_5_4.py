@@ -9,7 +9,7 @@ async def main():
                                        port=5432,
                                        user='postgres',
                                        database='products',
-                                       password='password')
+                                       password='123456')
     await connection.execute("INSERT INTO brand VALUES(DEFAULT, 'Levis')")
     await connection.execute("INSERT INTO brand VALUES(DEFAULT, 'Seven')")
 

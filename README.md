@@ -2,6 +2,9 @@
 
 Source code to the Manning book *Concurrency in Python with Asyncio*.
 
+说明：这个仓库是对 [原仓库](https://github.com/concurrency-in-python-with-asyncio/concurrency-in-python-with-asyncio) 的fork，并添加了个人的阅读笔记。
+笔记位于[目录](./notes)。
+
 ## Running
 This code ran successfully with Python version 3.10.2. Using a different version may give you different results or may not work.
 

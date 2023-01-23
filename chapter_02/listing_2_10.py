@@ -16,3 +16,10 @@ async def main():
     await second_delay
 
 asyncio.run(main())
+
+# sleeping for 3 second(s)
+# sleeping for 3 second(s)
+# I'm running other code while I'm waiting!
+# I'm running other code while I'm waiting!
+# finished sleeping for 3 second(s)
+# finished sleeping for 3 second(s)

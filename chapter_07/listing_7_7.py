@@ -11,6 +11,8 @@ def get_status_code(url: str) -> int:
 @async_timed()
 async def main():
     urls = ['https://www.example.com' for _ in range(1000)]
+    # compare: loop.run_in_executor(pool, functools.partial(get_status_code, url))
+    # `to_thread()` provide more friendly interface to call function
     tasks = [asyncio.to_thread(get_status_code, url) for url in urls]
     results = await asyncio.gather(*tasks)
     print(results)

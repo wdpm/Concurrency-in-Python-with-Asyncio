@@ -19,3 +19,9 @@ async def main():
 
 
 asyncio.run(main())
+
+# starting <function main at 0x000002229EF1E950> with args () {}
+# starting <function fetch_status at 0x000002229EF1E4D0> with args (<aiohttp.client.ClientSession object at 0x000002229EEC2050>, 'https://www.example.com') {}
+# finished <function fetch_status at 0x000002229EF1E4D0> in 1.0657 second(s)
+# Status for https://www.example.com was 200
+# finished <function main at 0x000002229EF1E950> in 1.0667 second(s)

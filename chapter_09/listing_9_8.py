@@ -9,10 +9,10 @@ from typing import List, Dict
 
 
 async def create_database_pool():
-    pool: Pool = await asyncpg.create_pool(host='127.0.0.1',
+    pool: Pool = await asyncpg.create_pool(host='192.168.1.6',
                                            port=5432,
                                            user='postgres',
-                                           password='password',
+                                           password='123456',
                                            database='products',
                                            min_size=6,
                                            max_size=6)

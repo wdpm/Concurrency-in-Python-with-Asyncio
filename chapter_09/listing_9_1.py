@@ -8,6 +8,9 @@ routes = web.RouteTableDef()
 
 @routes.get('/time')  # A
 async def time(request: Request) -> Response:
+
+    print(request.headers)
+
     today = datetime.today()
 
     result = {

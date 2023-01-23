@@ -8,7 +8,7 @@ async def main():
                                        port=5432,
                                        user='postgres',
                                        database='products',
-                                       password='password')
+                                       password='123456')
     transaction: Transaction = connection.transaction() #A
     await transaction.start() #B
     try:
@@ -31,3 +31,5 @@ async def main():
     await connection.close()
 
 asyncio.run(main())
+
+# 这里的例子中，query返回的结果数据量很小，因此可以直接放于内存中。

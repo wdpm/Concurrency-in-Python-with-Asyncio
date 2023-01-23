@@ -9,7 +9,7 @@ def mean_for_row(arr, row):
     return np.mean(arr[row])
 
 
-data_points = 4000000000
+data_points = 4000000000//2
 rows = 50
 columns = int(data_points / rows)
 
@@ -29,3 +29,5 @@ async def main():
 
 
 asyncio.run(main())
+
+# 2.846881866455078

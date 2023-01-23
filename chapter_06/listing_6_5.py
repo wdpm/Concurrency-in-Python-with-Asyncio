@@ -22,10 +22,12 @@ async def main():
         for call in calls:
             call_coros.append(loop.run_in_executor(process_pool, call))
 
-        results = await asyncio.gather(*call_coros)
+        # results = await asyncio.gather(*call_coros)
+        # for result in results:
+        #     print(result)
 
-        for result in results:
-            print(result)
+        for future in asyncio.as_completed(call_coros):
+            print(await future)
 
 
 if __name__ == "__main__":

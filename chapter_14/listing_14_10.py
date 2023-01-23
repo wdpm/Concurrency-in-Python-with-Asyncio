@@ -33,19 +33,37 @@ async def main(sel: BaseSelector):
 
 
 selector = selectors.DefaultSelector()
-
 coro = main(selector)
 
 while True: #D
     try:
+        # advance to first wait()
         state = coro.send(None)
 
+        # print('coro.send end')
+
+        # Each time a selector event occurs, run the registered callback
         events = selector.select()
 
         for key, mask in events:
             print('Processing selector events...')
+            print(f'key: {key}; mask: {mask}')
+            # key: SelectorKey(fileobj=<socket.socket fd=512, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM,proto=0, laddr=('127.0.0.1', 8000)>, fd=512, events=1,
+            # data=functools.partial(<function accept_connection at 0x000001B5F5053D90>,
+            # <listing_14_8.CustomFuture object at 0x000001B5F52F0B20>)); mask: 1
             callback = key.data
             callback(key.fileobj)
     except StopIteration as si:
         print('Application finished!')
         break
+
+# Waiting for socket connection!
+# Registering socket to listen for connections
+# Pausing to listen for connections...
+
+# Processing selector events...
+# We got a connection from <socket.socket fd=424, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM,
+# proto=0, laddr=('127.0.0.1', 8000)>!
+# Got a connection <socket.socket fd=424, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM,
+# proto=0, laddr=('127.0.0.1', 8000)>!
+# Application finished!

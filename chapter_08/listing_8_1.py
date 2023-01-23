@@ -2,7 +2,7 @@ import asyncio
 from asyncio import Transport, Future, AbstractEventLoop
 from typing import Optional
 
-
+# toy http客户端
 class HTTPGetClientProtocol(asyncio.Protocol):
 
     def __init__(self, host: str, loop: AbstractEventLoop):

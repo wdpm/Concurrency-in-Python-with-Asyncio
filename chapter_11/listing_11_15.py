@@ -9,6 +9,10 @@ class ConnectionState(Enum):
 
 
 class Connection:
+    """
+    We first have an underlying connection that can’t run multiple queries at the same time,
+    and the database connection may not be initialized before someone tries to run a query
+    """
 
     def __init__(self):
         self._state = ConnectionState.WAIT_INIT
@@ -52,3 +56,22 @@ async def main():
 
 
 asyncio.run(main())
+
+# execute: Waiting for connection to initialize
+# _is_initialized: Connection not finished initializing, state is ConnectionState.WAIT_INIT
+# execute: Waiting for connection to initialize
+# _is_initialized: Connection not finished initializing, state is ConnectionState.WAIT_INIT
+
+# change_state: State changing from ConnectionState.WAIT_INIT to ConnectionState.INITIALIZING
+# initialize: Initializing connection...
+# _is_initialized: Connection not finished initializing, state is ConnectionState.INITIALIZING
+# _is_initialized: Connection not finished initializing, state is ConnectionState.INITIALIZING
+
+# initialize: Finished initializing connection
+
+# change_state: State changing from ConnectionState.INITIALIZING to ConnectionState.INITIALIZED
+# _is_initialized: Connection is initialized!
+# execute: Running select * from table!!!
+
+# _is_initialized: Connection is initialized!
+# execute: Running select * from other_table!!!

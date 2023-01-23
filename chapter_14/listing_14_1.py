@@ -19,6 +19,7 @@ class TaskRunner:
             elif asyncio.iscoroutine(task):
                 awaitable_tasks.append(asyncio.create_task(task))
             else:
+                # to schedule our plain function to run on the next iteration of the event loop
                 self.loop.call_soon(task)
 
         await asyncio.gather(*awaitable_tasks)
@@ -45,3 +46,10 @@ if __name__ == "__main__":
     runner.add_task(regular_function)
 
     runner.run()
+
+# Running coroutine, sleeping!
+# Running coroutine, sleeping!
+# Hello from a regular function!
+# ----------------------------------
+# Finished sleeping!
+# Finished sleeping

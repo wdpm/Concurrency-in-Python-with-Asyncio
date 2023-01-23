@@ -26,3 +26,7 @@ async def main():
 
 
 asyncio.run(main())
+
+# Processing work item (1, 'High priority')
+# Processing work item (2, 'Medium priority')
+# Processing work item (3, 'Lowest priority')

@@ -5,8 +5,10 @@ import uvloop
 
 async def connected(reader: StreamReader, writer: StreamWriter):
     line = await reader.readline()
+
     writer.write(line)
     await writer.drain()
+
     writer.close()
     await writer.wait_closed()
 
@@ -17,4 +19,7 @@ async def main():
 
 
 uvloop.install() #A
+# loop = uvloop.new_event_loop()
+# asyncio.set_event_loop(loop)
+
 asyncio.run(main())

@@ -3,7 +3,7 @@ import psycopg2
 
 app = Flask(__name__)
 
-conn_info = "dbname=products user=postgres password=password host=127.0.0.1"
+conn_info = "dbname=products user=postgres password=123456 host=172.30.64.1"
 db = psycopg2.connect(conn_info)
 
 

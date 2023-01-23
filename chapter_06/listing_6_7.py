@@ -18,3 +18,5 @@ with open('googlebooks-eng-all-1gram-20120701-a', encoding='utf-8') as f:
 
     end = time.time()
     print(f'{end-start:.4f}')
+
+# 72.7196

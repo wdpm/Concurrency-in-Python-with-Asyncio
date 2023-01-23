@@ -10,6 +10,7 @@ async def read_from_client(conn, loop: EventLoop): #A
         while data := await loop.sock_recv(conn):
             print(f'Got {data} from client!')
     finally:
+        print(f'close connection {conn}')
         loop.sock_close(conn)
 
 
@@ -34,3 +35,21 @@ async def main(loop: EventLoop):
 
 event_loop = EventLoop() #C
 event_loop.run(main(event_loop))
+
+# 注意：windows下的telnet命令会一个一个发送字符，而不是输入一句话后enter发送。
+# 解决方法：可以使用命令模式，具体步骤：
+# 1. telnet ip port
+# 2. Ctrl + ]
+# 3. send hello world
+# console log示例：Got b'hello world' from client!
+
+# Waiting for connection...
+# Registering socket to accept connections...
+
+# Selector has an event, processing...
+# I got a new connection from <socket.socket fd=444, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8000)>!
+# Waiting for connection...
+# Registering socket to accept connections...
+# Reading data from client <socket.socket fd=528, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8000), raddr=('127.0.0.1', 34439)>
+# Registering socket to listen for data...
+

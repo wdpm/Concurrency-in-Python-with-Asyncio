@@ -5,6 +5,7 @@ from dataclasses import dataclass, field
 
 @dataclass(order=True)
 class WorkItem:
+    # only be sorted by the priority field
     priority: int
     data: str = field(compare=False)
 

@@ -1,10 +1,15 @@
 from multiprocessing import Process, Value
 
-
+# To avoid race conditions, we must make our parallel code sequential in critical sections.
+# This can hurt the performance of our multiprocessing code.
 def increment_value(shared_int: Value):
     shared_int.get_lock().acquire()
     shared_int.value = shared_int.value + 1
     shared_int.get_lock().release()
+
+    # or
+    # with shared_int.get_lock():
+    #     shared_int.value += 1
 
 
 if __name__ == '__main__':

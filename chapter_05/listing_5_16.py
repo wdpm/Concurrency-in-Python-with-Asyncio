@@ -7,12 +7,13 @@ async def main():
                                        port=5432,
                                        user='postgres',
                                        database='products',
-                                       password='password')
+                                       password='123456')
     async with connection.transaction():
         query = 'SELECT product_id, product_name from product'
         cursor = await connection.cursor(query) #A
         await cursor.forward(500) #B
         products = await cursor.fetch(100) #C
+        # 501...600
         for product in products:
             print(product)
 

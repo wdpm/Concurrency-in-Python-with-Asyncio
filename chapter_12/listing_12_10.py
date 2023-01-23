@@ -36,3 +36,9 @@ async def main():
 
 
 asyncio.run(main())
+
+# Processing work item WorkItem(priority=1, order=5, data='High priority')
+# Processing work item WorkItem(priority=2, order=4, data='Medium priority')
+# Processing work item WorkItem(priority=3, order=3, data='Lowest priority third')
+# Processing work item WorkItem(priority=3, order=2, data='Lowest priority second')
+# Processing work item WorkItem(priority=3, order=1, data='Lowest priority first')

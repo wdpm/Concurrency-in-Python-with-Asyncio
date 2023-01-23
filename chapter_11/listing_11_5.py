@@ -47,3 +47,11 @@ async def main():
 
 
 asyncio.run(main())
+
+
+# We first acquire the lock and create the message tasks. While this is happening, Eric
+# disconnects, and the code in disconnect tries to acquire the lock.
+#
+# Since message_all_users still holds the lock, we need to wait for it to finish before running the code in disconnect.
+#
+# This lets all the messages finish sending out before closing out the socket, preventing our bug.

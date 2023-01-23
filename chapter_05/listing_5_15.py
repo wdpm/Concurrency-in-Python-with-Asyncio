@@ -7,7 +7,7 @@ async def main():
                                        port=5432,
                                        user='postgres',
                                        database='products',
-                                       password='password')
+                                       password='123456')
 
     query = 'SELECT product_id, product_name FROM product'
     async with connection.transaction():

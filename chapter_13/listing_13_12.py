@@ -12,7 +12,7 @@ async def consume_and_send(text_list, stdout: StreamReader, stdin: StreamWriter)
 
 
 async def main():
-    program = ['python3', 'listing_13_13.py']
+    program = ['python3', 'listing_13_11.py']
     process: Process = await asyncio.create_subprocess_exec(*program,
                                                             stdout=asyncio.subprocess.PIPE,
                                                             stdin=asyncio.subprocess.PIPE)
@@ -23,3 +23,9 @@ async def main():
 
 
 asyncio.run(main())
+
+# b'Enter text to echo: '
+# b'one\nEnter text to echo: '
+# b'two\nEnter text to echo: '
+# b'three\nEnter text to echo: '
+# b'four\nEnter text to echo: '

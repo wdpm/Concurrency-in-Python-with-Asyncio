@@ -26,6 +26,7 @@ async def main():
             else:
                 logging.error("Request got an exception",
                               exc_info=done_task.exception())
+                # how to retry
 
 
 asyncio.run(main())

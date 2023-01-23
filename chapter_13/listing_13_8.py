@@ -19,7 +19,7 @@ async def encrypt(sem: Semaphore, text: str) -> bytes:
 
 
 async def main():
-    text_list = [''.join(random.choice(string.ascii_letters) for _ in range(1000)) for _ in range(1000)]
+    text_list = [''.join(random.choice(string.ascii_letters) for _ in range(1000)) for _ in range(100)]
     semaphore = Semaphore(os.cpu_count())
     s = time.time()
     tasks = [asyncio.create_task(encrypt(semaphore, text)) for text in text_list]

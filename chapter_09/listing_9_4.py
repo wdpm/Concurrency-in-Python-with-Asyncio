@@ -1,12 +1,14 @@
 from aiohttp import web
 from aiohttp.web_request import Request
 from aiohttp.web_response import Response
+
 from chapter_09.listing_9_2 import create_database_pool, destroy_database_pool
 
 routes = web.RouteTableDef()
 DB_KEY = 'database'
 
 
+# NOT WORK: 404 not found
 @routes.post('/product')
 async def create_product(request: Request) -> Response:
     PRODUCT_NAME = 'product_name'
@@ -15,7 +17,11 @@ async def create_product(request: Request) -> Response:
     if not request.can_read_body:
         raise web.HTTPBadRequest()
 
+    # json() is a coroutine
+    # Instead of blocking our handler waiting for all data to come in, we await until all data is there
     body = await request.json()
+
+    print(body)
 
     if PRODUCT_NAME in body and BRAND_ID in body:
         db = request.app[DB_KEY]

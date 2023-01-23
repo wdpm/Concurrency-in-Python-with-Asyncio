@@ -37,3 +37,10 @@ async def main():
 
 
 asyncio.run(main())
+
+# Finished 36/200 requests
+# Finished 36/200 requests
+# finished <function main at 0x000002735870DBD0> in 94.9450 second(s)
+# Traceback (most recent call last):
+
+# 没有处理请求异常，会导致异常蔓延到整个程序。

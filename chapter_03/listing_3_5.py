@@ -34,3 +34,9 @@ try:
 finally:
     server_socket.close()
 
+# 瞬间闪退
+# BlockingIOError: [WinError 10035] 无法立即完成一个非阻止性套接字操作。
+
+# 原因：
+# We’ll get thrown a BlockingIOError because our server
+# socket has no connection yet and therefore no data to process:

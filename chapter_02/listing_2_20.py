@@ -18,3 +18,18 @@ async def main():
     await task_3
 
 asyncio.run(main())
+
+# starting <function main at 0x000001F6915793F0> with args () {}
+# starting <function get_example_status at 0x000001F6904D3D00> with args () {}
+# finished <function get_example_status at 0x000001F6904D3D00> in 1.2101 second(s)
+# starting <function get_example_status at 0x000001F6904D3D00> with args () {}
+# finished <function get_example_status at 0x000001F6904D3D00> in 1.2590 second(s)
+# starting <function get_example_status at 0x000001F6904D3D00> with args () {}
+# finished <function get_example_status at 0x000001F6904D3D00> in 1.2571 second(s)
+# finished <function main at 0x000001F6915793F0> in 3.7272 second(s)
+
+# requests.get() is blocking the only one thread => block event loop
+
+# If you need to use the requests library, you can still use async syntax, but you’ll
+# need to explicitly tell asyncio to use multithreading with a thread pool executor. We’ll see
+# how to do this in chapter 7

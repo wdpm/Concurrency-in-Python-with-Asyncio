@@ -1,7 +1,8 @@
-from threading import Thread
 import socket
+from threading import Thread
 
 
+# 自定义线程，实现自己的close逻辑
 class ClientEchoThread(Thread):
 
     def __init__(self, client):
@@ -12,17 +13,17 @@ class ClientEchoThread(Thread):
         try:
             while True:
                 data = self.client.recv(2048)
-                if not data: #A
+                if not data:  # A
                     raise BrokenPipeError('Connection closed!')
                 print(f'Received {data}, sending!')
                 self.client.sendall(data)
-        except OSError as e: #B
+        except OSError as e:  # B
             print(f'Thread interrupted by {e} exception, shutting down!')
 
     def close(self):
-        if self.is_alive(): #C
+        if self.is_alive():  # C
             self.client.sendall(bytes('Shutting down!', encoding='utf-8'))
-            self.client.shutdown(socket.SHUT_RDWR) #D
+            self.client.shutdown(socket.SHUT_RDWR)  # D
 
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server:
@@ -36,6 +37,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server:
             thread = ClientEchoThread(connection)
             connection_threads.append(thread)
             thread.start()
+    # when main thread Ctrl-C, close all other threads
     except KeyboardInterrupt:
         print('Shutting down!')
-        [thread.close() for thread in connection_threads] #E
+        [thread.close() for thread in connection_threads]  # E

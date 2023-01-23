@@ -10,6 +10,9 @@ async def write_output(prefix: str, stdout: StreamReader):
 
 async def main():
     program = ['ls', '-la']
+    # program = ['cmd', '/c dir']
+
+    # we want to pipe stdout
     process: Process = await asyncio.create_subprocess_exec(*program,
                                                             stdout=asyncio.subprocess.PIPE)
     print(f'Process pid is: {process.pid}')
@@ -20,3 +23,7 @@ async def main():
 
 
 asyncio.run(main())
+
+# One crucial aspect of using pipes, and dealing with subprocesses input and output in
+# general, is that they are susceptible to deadlocks. The wait coroutine is especially susceptible to this
+# if our subprocess generates a lot of output, and we don’t properly consume it.

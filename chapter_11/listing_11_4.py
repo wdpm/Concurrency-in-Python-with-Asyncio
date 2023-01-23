@@ -18,6 +18,8 @@ async def b(lock: Lock):
         await delay(2)
     print('Coroutine b released the lock')
 
+# work in python 3.10+
+# lock = Lock()
 
 async def main():
     lock = Lock()
@@ -25,3 +27,17 @@ async def main():
 
 
 asyncio.run(main())
+
+# Coroutine a waiting to acquire the lock
+# Coroutine a is in the critical section
+# sleeping for 2 second(s)
+
+# Coroutine b waiting to acquire the lock
+
+# finished sleeping for 2 second(s)
+# Coroutine a released the lock
+
+# Coroutine b is in the critical section
+# sleeping for 2 second(s)
+# finished sleeping for 2 second(s)
+# Coroutine b released the lock

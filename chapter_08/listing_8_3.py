@@ -14,10 +14,11 @@ async def main():
                    f"Connection: close\r\n" \
                    f"Host: {host}\r\n\r\n"
 
-    stream_reader, stream_writer = await asyncio.open_connection('www.example.com', 80)
+    stream_reader, stream_writer = await asyncio.open_connection(host, 80)
 
     try:
         stream_writer.write(request.encode()) #B
+        # flush write buffer
         await stream_writer.drain()
 
         responses = [response async for response in read_until_empty(stream_reader)] #C
@@ -25,6 +26,8 @@ async def main():
         print(''.join(responses))
     finally:
         stream_writer.close() #D
+        # immediately after we call close our connection isn’t closed until sometime later.
+        # so we need await
         await stream_writer.wait_closed()
 
 

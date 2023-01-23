@@ -1,6 +1,8 @@
 import socket
 
+# AF_INET => use hostname:port
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+# reuse address
 server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
 server_address = ('127.0.0.1', 8000)

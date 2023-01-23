@@ -6,7 +6,10 @@ from random import sample
 
 def load_common_words() -> List[str]:
     with open('common_words.txt') as common_words:
-        return common_words.readlines()
+        # strip line break character(\n) of every line
+        # return common_words.readlines()
+        # return [line.strip() for line in common_words.readlines()]
+        return common_words.read().splitlines()
 
 
 def generate_brand_names(words: List[str]) -> List[Tuple[Union[str, ]]]:
@@ -25,7 +28,7 @@ async def main():
                                        port=5432,
                                        user='postgres',
                                        database='products',
-                                       password='password')
+                                       password='123456')
     await insert_brands(common_words, connection)
 
 

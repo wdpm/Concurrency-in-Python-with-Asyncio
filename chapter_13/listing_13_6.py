@@ -8,6 +8,9 @@ async def main():
                                                             stdout=asyncio.subprocess.PIPE)
     print(f'Process pid is: {process.pid}')
 
+    # This coroutine blocks until the subprocess completes and concur-
+    # rently consumes standard output and standard error, returning the output complete
+    # once the application finishes.
     stdout, stderr = await process.communicate()
     print(stdout)
     print(stderr)
@@ -15,3 +18,10 @@ async def main():
 
 
 asyncio.run(main())
+
+#  While we avoid potential deadlocks, we have a serious drawback in
+# that we can’t interactively process output from standard output.
+
+# An additional drawback is that communicate buffers all the data from standard
+# output and standard input in memory. If you’re working with a subprocess that could
+# produce a large amount of data, you run the risk of running out of memory

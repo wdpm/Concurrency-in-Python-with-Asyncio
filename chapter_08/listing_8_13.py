@@ -14,6 +14,7 @@ class ChatServer:
         async with server:
             await server.serve_forever()
 
+    # reader => read client input; writer => write content to client
     async def client_connected(self, reader: StreamReader, writer: StreamWriter): #A
         command = await reader.readline()
         print(f'CONNECTED {reader} {writer}')

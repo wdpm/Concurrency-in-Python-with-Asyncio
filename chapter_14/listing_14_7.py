@@ -14,3 +14,9 @@ async def meet_and_greet():
 coro = meet_and_greet()
 
 coro.send(None)
+
+# Hello!
+# Goodbye!
+# Traceback (most recent call last):
+# ......
+# StopIteration

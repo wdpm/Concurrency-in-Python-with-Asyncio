@@ -24,7 +24,12 @@ async def main():
     e = time.time()
 
     print(f'Total time: {e - s}')
-    print(encrypted_text)
+    print(len(encrypted_text))
 
 
 asyncio.run(main())
+
+# Total time: 22.161126136779785
+
+# 这里在同一时刻创建了100个process，但是本地CPU却没有这么多核心。因此，CPU上下文的切换不容忽视。
+# 为了更匹配本地计算资源，可以使用semaphore来限制同一时刻存在process的数量。

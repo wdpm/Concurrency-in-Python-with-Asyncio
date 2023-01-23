@@ -14,6 +14,7 @@ def a():
 
 
 def b():
+    # acquire a => b can fix dead lock
     with lock_b: #D
         print('Acquired lock b from method b!')
         with lock_a: #E

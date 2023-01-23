@@ -41,3 +41,12 @@ async def main():
 
 
 asyncio.run(main())
+
+# steps:
+# 1. create the message tasks, then we await, suspending our message_all_users coroutine.
+
+# 2. This gives user_disconnect('Eric') a chance to run,
+# which will close Eric’s socket and remove it from the user_names_to_sockets dictionary.
+
+# 3. Once this is finished, message_all_users resumes; and we start to send out messages.
+# Since Eric’s socket was closed, we see an exception, and he won’t get the message we intended to send.

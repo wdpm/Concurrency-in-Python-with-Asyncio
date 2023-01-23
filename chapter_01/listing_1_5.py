@@ -25,3 +25,9 @@ fibs_no_threading()
 end = time.time()
 
 print(f'Completed in {end - start:.4f} seconds.')
+
+# fib(40) is 63245986
+# fib(41) is 102334155
+# Completed in 88.8098 seconds.
+
+# f(40) 和 f(41) 可以分离到不同的线程中计算。

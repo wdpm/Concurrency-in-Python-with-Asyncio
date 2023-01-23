@@ -15,7 +15,11 @@ class Server:
         await server.serve_forever()
 
     def _client_connected(self, reader: StreamReader, writer: StreamWriter):
+        # in our _client_connected callback, we set the data of the context variable to the client’s address.
         self.user_address.set(writer.get_extra_info('peername')) #B
+
+        # This will allow any tasks spawned from this parent task to have access to the information we set;
+        # in this instance, this will be tasks that listen for messages from the clients.
         asyncio.create_task(self.listen_for_messages(reader))
 
     async def listen_for_messages(self, reader: StreamReader):
@@ -29,3 +33,9 @@ async def main():
 
 
 asyncio.run(main())
+
+# Use netcat in terminal:
+# > nc localhost 9000
+
+# Got message b'hello\n' from ('127.0.0.1', 40188)
+# Got message b'mad\n' from ('127.0.0.1', 40190)

@@ -26,3 +26,8 @@ if __name__ == "__main__":
 
     end_time = time.time()
     print(f'Completed in {end_time-start_time}')
+
+# Finished counting to 100000000 in 7.581372499465942
+# Finished counting to 200000000 in 12.412509679794312
+# Completed in 12.621538877487183
+

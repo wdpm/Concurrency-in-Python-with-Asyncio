@@ -8,6 +8,7 @@ async def main():
 
     seconds_elapsed = 0
 
+    # 轮询不是一种优雅的查询做法
     while not long_task.done():
         print('Task not finished, checking again in a second.')
         await asyncio.sleep(1)

@@ -13,12 +13,15 @@ class EventLoop:
 
     def _register_socket_to_read(self, sock, callback):
         future = CustomFuture()
+
         try:
             self.selector.get_key(sock)
         except KeyError:
+            # registers them with the selector if the socket isn’t already registered.
             sock.setblocking(False)
             self.selector.register(sock, selectors.EVENT_READ, functools.partial(callback, future))
         else:
+            # If the socket is registered, we replace the callback
             self.selector.modify(sock, selectors.EVENT_READ, functools.partial(callback, future))
         return future
 
@@ -48,6 +51,7 @@ class EventLoop:
         result = sock.accept()
         future.set_result(result)
 
+    # main entry
     def run(self, coro):
         self.current_result = coro.send(None)
 
@@ -62,12 +66,17 @@ class EventLoop:
             except StopIteration as si:
                 return si.value
 
+            # run any tasks that are registered with our event loop by calling step on them
             for task in self._tasks_to_run:
                 task.step()
 
+            # Once we’ve run our tasks, we remove any that are finished from our task list.
             self._tasks_to_run = [task for task in self._tasks_to_run if not task.is_finished()]
 
+            # call selector.select(), blocking until there are any events fired on the sockets we’ve registered.
             events = self.selector.select()
+            # Once we have a socket event, or set of events, we loop through them,
+            # calling the callback we registered for that socket back in _register_socket_to_read
             print('Selector has an event, processing...')
             for key, mask in events:
                 callback = key.data

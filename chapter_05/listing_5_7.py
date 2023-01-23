@@ -26,7 +26,7 @@ async def main():
     async with asyncpg.create_pool(host='127.0.0.1',
                                    port=5432,
                                    user='postgres',
-                                   password='password',
+                                   password='123456',
                                    database='products',
                                    min_size=6,
                                    max_size=6) as pool:  # A

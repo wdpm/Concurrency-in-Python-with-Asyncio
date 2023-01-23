@@ -23,3 +23,13 @@ async def main():
 
 
 asyncio.run(main())
+
+# Waiting for event...
+# Waiting for event...
+
+# after 5 s
+
+# Performing work!
+# Performing work!
+# Finished work!
+# Finished work!

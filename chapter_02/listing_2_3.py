@@ -7,4 +7,9 @@ async def coroutine_add_one(number: int) -> int:
 
 result = asyncio.run(coroutine_add_one(1))
 
+print("main run")
+
 print(result)
+
+# main run
+# 2

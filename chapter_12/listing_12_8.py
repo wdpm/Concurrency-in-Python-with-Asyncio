@@ -34,3 +34,14 @@ async def main():
 
 
 asyncio.run(main())
+
+# Processing work item WorkItem(priority=1, data='High priority')
+# Processing work item WorkItem(priority=2, data='Medium priority')
+# Processing work item WorkItem(priority=3, data='Lowest priority third')
+# Processing work item WorkItem(priority=3, data='Lowest priority second')
+# Processing work item WorkItem(priority=3, data='Lowest priority')
+
+# 对于相当的优先级3，插入顺序和执行顺序不保证相同。
+
+# This is happening because the underlying heapsort algorithm is not a stable
+# sort algorithm, as equal items are not guaranteed to be in the same order of insertion

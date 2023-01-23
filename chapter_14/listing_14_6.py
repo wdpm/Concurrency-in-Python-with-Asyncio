@@ -25,3 +25,21 @@ while True: #B
 
     if one_to_five_result is None and five_to_ten_result is None:
         break
+
+# 1
+# 5
+
+# 2
+# 6
+
+# 3
+# 7
+
+# 4
+# 8
+
+# None
+# 9
+
+# None
+# None

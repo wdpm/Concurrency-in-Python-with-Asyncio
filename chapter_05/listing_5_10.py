@@ -8,7 +8,7 @@ async def main():
                                        port=5432,
                                        user='postgres',
                                        database='products',
-                                       password='password')
+                                       password='123456')
     try:
         async with connection.transaction():
             insert_brand = "INSERT INTO brand VALUES(9999, 'big_brand')"
@@ -26,3 +26,6 @@ async def main():
 
 
 asyncio.run(main())
+
+# asyncpg.exceptions.UniqueViolationError: 重复键违反唯一约束"brand_pkey"
+# DETAIL:  键值"(brand_id)=(9999)" 已经存在

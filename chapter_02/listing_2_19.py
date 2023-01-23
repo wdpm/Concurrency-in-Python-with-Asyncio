@@ -1,4 +1,5 @@
 import asyncio
+
 from util import async_timed, delay
 
 
@@ -21,3 +22,14 @@ async def main():
 
 
 asyncio.run(main())
+
+# starting <function main at 0x00000276A5262EF0> with args () {}
+# starting <function cpu_bound_work at 0x00000276A4A92DD0> with args () {}
+# finished <function cpu_bound_work at 0x00000276A4A92DD0> in 5.3080 second(s)
+# starting <function cpu_bound_work at 0x00000276A4A92DD0> with args () {}
+# finished <function cpu_bound_work at 0x00000276A4A92DD0> in 5.8248 second(s)
+# sleeping for 4 second(s)
+# finished sleeping for 4 second(s)
+# finished <function main at 0x00000276A5262EF0> in 15.1366 second(s)
+
+# 对于CPU密集型运算，使用asyncio模型毫无增益

@@ -19,3 +19,10 @@ async def main():
 
 
 asyncio.run(main())
+
+# starting <function main at 0x000002E6689D2EF0> with args () {}
+# starting <function cpu_bound_work at 0x000002E6681A2DD0> with args () {}
+# finished <function cpu_bound_work at 0x000002E6681A2DD0> in 6.2831 second(s)
+# starting <function cpu_bound_work at 0x000002E6681A2DD0> with args () {}
+# finished <function cpu_bound_work at 0x000002E6681A2DD0> in 6.2192 second(s)
+# finished <function main at 0x000002E6689D2EF0> in 12.5023 second(s)

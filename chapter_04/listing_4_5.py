@@ -9,3 +9,16 @@ async def main() -> None:
     [await task for task in tasks]
 
 asyncio.run(main())
+
+# 上面代码的弊端：
+# 1.必须记住要分离task的创建和await
+# 2.没有处理异常
+
+# starting <function main at 0x00000299A45B2E60> with args () {}
+# sleeping for 3 second(s)
+# sleeping for 3 second(s)
+# sleeping for 3 second(s)
+# finished sleeping for 3 second(s)
+# finished sleeping for 3 second(s)
+# finished sleeping for 3 second(s)
+# finished <function main at 0x00000299A45B2E60> in 3.0137 second(s)

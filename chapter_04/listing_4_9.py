@@ -11,7 +11,7 @@ async def main():
                     fetch_status(session, 'https://example.com', 10),
                     fetch_status(session, 'https://example.com', 10)]
 
-        for done_task in asyncio.as_completed(fetchers, timeout=2):
+        for done_task in asyncio.as_completed(fetchers, timeout=4):
             try:
                 result = await done_task
                 print(result)
@@ -23,3 +23,7 @@ async def main():
 
 
 asyncio.run(main())
+
+# 200
+# We got a timeout error!
+# We got a timeout error!

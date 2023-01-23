@@ -32,7 +32,7 @@ async def checkout_customer(queue: Queue, cashier_number: int):
         queue.task_done()
 
 
-def generate_customer(customer_id: int) -> Customer: #A
+def generate_customer(customer_id: int) -> Customer:  # A
     all_products = [Product('beer', 2),
                     Product('bananas', .5),
                     Product('sausage', .2),
@@ -42,7 +42,7 @@ def generate_customer(customer_id: int) -> Customer: #A
     return Customer(customer_id, products)
 
 
-async def customer_generator(queue: Queue): #B
+async def customer_generator(queue: Queue):  # B
     customer_count = 0
 
     while True:
@@ -68,3 +68,12 @@ async def main():
 
 
 asyncio.run(main())
+
+# 会出现这种场景：消费者队列已满，生产者在阻塞等待，等待队列有空位可以放进去。
+# Waiting to put customer in line...
+# Cashier 0 finished checking out customer 42
+# Cashier 0 checking out customer 46
+# Cashier 0 checking out customer 46's bananas
+# Customer put in line!
+
+# 优雅停机：停下新的生产（停止生产），处理正在处理的任务，然后关闭服务。

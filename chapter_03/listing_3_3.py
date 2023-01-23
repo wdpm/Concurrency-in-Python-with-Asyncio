@@ -10,6 +10,8 @@ server_socket.listen()
 connections = []
 
 try:
+    # 这个模型允许多个socket客户端链接，但是一个thread是会阻塞的。因此：
+    # 同一时刻只能处理一个socket，是个玩具。
     while True:
         connection, client_address = server_socket.accept()
         print(f'I got a connection from {client_address}!')
