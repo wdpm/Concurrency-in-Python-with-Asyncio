@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# thanks: https://zinglix.xyz/2020/04/18/wsl2-proxy/
+
 hostip=$(cat /etc/resolv.conf | grep nameserver | awk '{ print $2 }')
 wslip=$(hostname -I | awk '{print $1}')
 port=7890

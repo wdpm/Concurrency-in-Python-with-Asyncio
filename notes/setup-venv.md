@@ -7,13 +7,13 @@
 py -m venv venv
 ```
 ```bash
-.\env\Scripts\activate
+.\venv\Scripts\activate
 ```
 
 ```
 where python
 
-D:\Code\MyLocalProjects\python-consurrency-with-asyncio-notes\env\Scripts\python.exe
+D:\Code\MyLocalProjects\python-consurrency-with-asyncio-notes\venv\Scripts\python.exe
 C:\Python\Python37\python.exe
 C:\miniconda3\python.exe
 C:\Users\wdpm\AppData\Local\Programs\Python\Python310\python.exe
@@ -21,7 +21,7 @@ C:\Users\wdpm\AppData\Local\Microsoft\WindowsApps\python.exe
 ```
 
 ```bash
-.\env\Scripts\python.exe
+.\venv\Scripts\python.exe
 
 Python 3.10.7 (tags/v3.10.7:6cc6b13, Sep  5 2022, 14:08:36) [MSC v.1933 64 bit (AMD64)] on win32
 Type "help", "copyright", "credits" or "license" for more information.
