@@ -4,9 +4,13 @@ import asyncio
 from concurrent.futures import ThreadPoolExecutor
 from util import async_timed
 
+import logging
+
+logger = logging.getLogger(__name__)
 
 def get_status_code(url: str) -> int:
     response = requests.get(url)
+    logger.info('func')
     return response.status_code
 
 
@@ -21,3 +25,5 @@ async def main():
 
 
 asyncio.run(main())
+
+# finished <function main at 0x0000019B4AACD990> in 92.5911 second(s)

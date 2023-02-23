@@ -27,4 +27,4 @@ async def main():
 asyncio.run(main())
 
 # wait_for timeout时取消任务
-# wair timeout时仅仅返回，不取消任务
+# wait timeout时仅仅返回，不取消任务

@@ -1,8 +1,10 @@
 import asyncio
-import aiohttp
 import logging
-from util import async_timed
+
+import aiohttp
+
 from chapter_04 import fetch_status
+from util import async_timed
 
 
 @async_timed()
@@ -20,13 +22,15 @@ async def main():
         print(f'Pending task count: {len(pending)}')
 
         for done_task in done:
-            # result = await done_task will throw an exception
-            if done_task.exception() is None:
+            # await done_task will throw an exception
+            exception = done_task.exception()
+
+            if exception is None:
                 print(done_task.result())
             else:
                 logging.error("Request got an exception",
-                              exc_info=done_task.exception())
-                # how to retry
+                              exc_info=exception)
+                # print(done_task.exception())
 
 
 asyncio.run(main())

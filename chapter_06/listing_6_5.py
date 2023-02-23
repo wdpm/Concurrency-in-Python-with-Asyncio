@@ -1,14 +1,19 @@
 import asyncio
+import logging
 from asyncio.events import AbstractEventLoop
 from concurrent.futures import ProcessPoolExecutor
 from functools import partial
 from typing import List
 
+logger = logging.getLogger(__name__)
 
 def countdown(count_from: int) -> int:
     counter = 0
     while counter < count_from:
         counter = counter + 1
+    # print('countdown')
+    # no log
+    logger.info("countdown")
     return counter
 
 

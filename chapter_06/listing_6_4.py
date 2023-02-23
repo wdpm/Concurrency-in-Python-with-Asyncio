@@ -1,6 +1,10 @@
 import time
 from concurrent.futures import ProcessPoolExecutor
 
+import logging
+
+logger = logging.getLogger(__name__)
+
 
 def count(count_to: int) -> int:
     start = time.time()
@@ -8,13 +12,16 @@ def count(count_to: int) -> int:
     while counter < count_to:
         counter = counter + 1
     end = time.time()
-    print(f'Finished counting to {count_to} in {end - start}')
+    # no log in pool.map()
+    logger.info(f'Finished counting to {count_to} in {end - start}')
+    # print(f'Finished counting to {count_to} in {end - start}')
     return counter
 
 
 if __name__ == "__main__":
     with ProcessPoolExecutor() as process_pool:
         numbers = [1, 3, 5, 22, 100000000]
+        # use map_async?
         for result in process_pool.map(count, numbers):
             print(result)
 

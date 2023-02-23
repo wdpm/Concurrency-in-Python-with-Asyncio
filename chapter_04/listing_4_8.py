@@ -1,15 +1,19 @@
 import asyncio
+
 import aiohttp
-from util import async_timed
+
 from chapter_04 import fetch_status
+from util import async_timed
 
 
 @async_timed()
 async def main():
     async with aiohttp.ClientSession() as session:
-        fetchers = [fetch_status(session, 'https://www.example.com', 1),
-                    fetch_status(session, 'https://www.example.com', 1),
-                    fetch_status(session, 'https://www.example.com', 10)]
+        fetchers = [
+            fetch_status(session, 'https://www.example.com', 10),
+            fetch_status(session, 'https://www.example.com', 1),
+            fetch_status(session, 'https://www.example.com', 1),
+        ]
 
         # results = await asyncio.gather(*fetchers, return_exceptions=True)
         # print(results)
@@ -25,7 +29,13 @@ async def main():
             print(await finished_task)
 
 
-
 asyncio.run(main())
 
-# 开头两个很快就返回，并打印结果。
+# 1s的两个很快就返回，并打印结果。
+# finished <function fetch_status at 0x000001D50056F130> in 1.9284 second(s)
+# 200
+# finished <function fetch_status at 0x000001D50056F130> in 3.5601 second(s)
+# 200
+# finished <function fetch_status at 0x000001D50056F130> in 10.2492 second(s)
+# 200
+# finished <function main at 0x000001D50056F880> in 10.2502 second(s)

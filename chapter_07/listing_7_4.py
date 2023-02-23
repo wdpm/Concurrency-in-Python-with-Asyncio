@@ -2,11 +2,15 @@ import time
 from concurrent.futures import ThreadPoolExecutor
 
 import requests
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 def get_status_code(url: str) -> int:
     try:
         response = requests.get(url)
+        logger.info('no log')
         return response.status_code
     except:
         return -1
@@ -40,11 +44,10 @@ def sync_requests_baseline():
     print(f'finished requests in {end - start:.4f} second(s)')
 
 
-sync_requests_baseline()
+# sync_requests_baseline()
 # finished requests in 1507.0989 second(s)
 # 200 => 987; -1 => 13
 
-# using_thread_pool()
-# requests.exceptions.SSLError: HTTPSConnectionPool(host='www.example.com', port=443): Max retries exceeded with url: /
-# finished requests in 16.8606 second(s)
+using_thread_pool()
+# finished requests in 198.3491 second(s)
 # 200 => 996; -1 => 4

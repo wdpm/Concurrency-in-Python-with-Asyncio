@@ -11,6 +11,7 @@ async def main():
                     fetch_status(session, 'https://example.com', 10),
                     fetch_status(session, 'https://example.com', 10)]
 
+        # 这里的timeout是对于这次任务而言的总超时
         for done_task in asyncio.as_completed(fetchers, timeout=4):
             try:
                 result = await done_task

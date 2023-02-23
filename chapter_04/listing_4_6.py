@@ -1,5 +1,7 @@
 import asyncio
+
 import aiohttp
+
 from chapter_04 import fetch_status
 from util import async_timed
 
@@ -18,4 +20,4 @@ async def main():
 
 asyncio.run(main())
 
-# in 6.8500 second(s)
+# finished <function main at 0x0000023FD3F23640> in 62.6669 second(s)

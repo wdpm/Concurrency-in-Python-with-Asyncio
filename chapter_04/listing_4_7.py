@@ -16,6 +16,7 @@ async def main():
     async with aiohttp.ClientSession() as session:
         urls = ['https://example.com', 'python://example.com']
         tasks = [fetch_status(session, url) for url in urls]
+        # 报错和成功都是返回，而不是超时
         results = await asyncio.gather(*tasks, return_exceptions=True)
 
         exceptions = [res for res in results if isinstance(res, Exception)]
@@ -37,4 +38,4 @@ asyncio.run(main())
 # Threw exceptions: [AssertionError()]
 
 # return_exceptions=False
-# 直接报错，缺乏必要的处理。不会影响其他的task运行。
+# 直接报错，缺乏必要的处理。不会影响其他的task运行,但会影响后续main代码的执行，因此需要改进。

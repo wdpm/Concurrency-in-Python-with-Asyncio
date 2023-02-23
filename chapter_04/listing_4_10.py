@@ -10,6 +10,9 @@ async def main():
         fetchers = \
           [asyncio.create_task(fetch_status(session, 'https://example.com')),
            asyncio.create_task(fetch_status(session, 'https://example.com'))]
+
+        # Note: This does not raise TimeoutError!
+        # Futures that aren't done when the timeout occurs are returned in the second set
         done, pending = await asyncio.wait(fetchers)
 
         print(f'Done task count: {len(done)}')
@@ -21,3 +24,8 @@ async def main():
 
 
 asyncio.run(main())
+
+# Done task count: 2
+# Pending task count: 0
+# 200
+# 200
